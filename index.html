@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung Galaxy S24 FE AI Phone</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #4285f4;
+            --accent-color: #34a853;
+            --dark-color: #202124;
+            --light-color: #f8f9fa;
+            --gray-color: #dadce0;
+            --text-color: #3c4043;
+            --discount-color: #ea4335;
+            --star-color: #fbbc04;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            margin-top: 60px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--dark-color), #000);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #2d9249;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .product-overview {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .product-thumbnails {
+            display: flex;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+        
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-thumbnail:hover, .product-thumbnail.active {
+            opacity: 1;
+        }
+        
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: var(--star-color);
+            margin-right: 0.5rem;
+        }
+        
+        .price-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .original-price {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: #777;
+        }
+        
+        .discount {
+            background-color: var(--discount-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .specs-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-color);
+        }
+        
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .specs-table td:first-child {
+            font-weight: bold;
+            width: 30%;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 2rem 0;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .review-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .review-name {
+            font-weight: bold;
+        }
+        
+        .review-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .review-rating {
+            color: var(--star-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-text {
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .mobile-nav {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-color);
+                padding: 1rem;
+                display: none;
+                z-index: 999;
+            }
+            
+            .mobile-nav.active {
+                display: block;
+            }
+            
+            .mobile-nav ul {
+                list-style: none;
+            }
+            
+            .mobile-nav ul li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+            
+            .mobile-nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-size: 1.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Samsung Galaxy S24 FE</div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#specs">Specs</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu" id="mobile-menu">☰</div>
+        </div>
+    </header>
+    
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#specs">Specs</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+    </div>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>SAMSUNG Galaxy S24 FE AI Phone</h1>
+                <p>Experience the power of AI with the new Galaxy S24 FE. Featuring a high-res 50MP camera, long battery life, and a brighter display screen.</p>
+                <a href="https://www.amazon.com/SAMSUNG-Unlocked-Smartphone-High-Res-Manufacturer/dp/B0DCLCPN9T" class="cta-button" target="_blank">Buy Now on Amazon</a>
+            </div>
+        </section>
+        
+        <section class="section" id="overview">
+            <h2 class="section-title">Product Overview</h2>
+            <div class="product-overview">
+                <div class="product-images">
+                    <img src="https://m.media-amazon.com/images/I/51SG-FYxj7L._AC_SL1500.jpg" alt="Samsung Galaxy S24 FE" class="product-image" id="main-image">
+                    <div class="product-thumbnails">
+                        <img src="https://m.media-amazon.com/images/I/51SG-FYxj7L._AC_SL1500.jpg" alt="Samsung Galaxy S24 FE Front" class="product-thumbnail active" data-src="https://m.media-amazon.com/images/I/51SG-FYxj7L._AC_SL1500.jpg">
+                        <img src="https://m.media-amazon.com/images/I/21tpSIOb4aL._AC_SL1500.jpg" alt="Samsung Galaxy S24 FE Side" class="product-thumbnail" data-src="https://m.media-amazon.com/images/I/21tpSIOb4aL._AC_SL1500.jpg">
+                    </div>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">SAMSUNG Galaxy S24 FE AI Phone, 128GB Unlocked Android Smartphone</h3>
+                    <div class="product-rating">
+                        <div class="stars">★★★★<span style="color: #dadce0;">★</span><span style="color: var(--star-color);">½</span></div>
+                        <span>4.5 (792 ratings)</span>
+                    </div>
+                    <div class="price-container">
+                        <div class="current-price">$499.39</div>
+                        <div class="original-price">$649.99</div>
+                        <div class="discount">23% OFF</div>
+                    </div>
+                    <p>The Samsung Galaxy S24 FE combines flagship features with excellent value. This unlocked Android smartphone features a high-resolution 50MP camera, long-lasting battery, and a brilliant 6.7-inch display with 120Hz refresh rate.</p>
+                    <p style="margin-top: 1rem;">Powered by Galaxy AI, this phone helps you capture, edit, and share moments like never before. With its impressive specs and US 1-Year Manufacturer Warranty, the S24 FE is the perfect choice for those seeking premium features at a mid-range price.</p>
+                    <a href="https://www.amazon.com/SAMSUNG-Unlocked-Smartphone-High-Res-Manufacturer/dp/B0DCLCPN9T" class="cta-button" style="margin-top: 1.5rem;" target="_blank">Buy Now</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="features">
+            <h2 class="section-title">AI-Powered Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3 class="feature-title">Photo Assist with Galaxy AI</h3>
+                    <p>Take a great pic, then make it better using Photo Assist. It gives you suggestions for improving your photo and makes it easier to move, remove or resize objects for post-worthy pics every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Real-time Translations</h3>
+                    <p>Understand text, calls and in-person conversations in another language using real-time translations with Galaxy AI. Never be lost in translation again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <h3 class="feature-title">Instant Slow-Mo</h3>
+                    <p>Sometimes you just want to make the moment last longer. Using Instant Slow-Mo with Galaxy AI, simply tap and hold to replay any video in epic slow motion.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3 class="feature-title">Epic Battery Power</h3>
+                    <p>Do what you love, whether work or play, without worrying about your battery. Galaxy S24 FE intuitively manages your apps to make your charge last longer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3 class="feature-title">Night Portrait</h3>
+                    <p>Poorly lit portraits? Not anymore. Bring details out of the dark with Night Portrait. Using AI, your Galaxy S24 FE can analyze and optimize your low-light shots and make them shine.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section" id="specs">
+            <h2 class="section-title">Technical Specifications</h2>
+            <div class="specs-container">
+                <table class="specs-table">
+                    <tr>
+                        <td>Brand</td>
+                        <td>SAMSUNG</td>
+                    </tr>
+                    <tr>
+                        <td>Operating System</td>
+                        <td>OneUI 6.1, Android 14</td>
+                    </tr>
+                    <tr>
+                        <td>RAM</td>
+                        <td>8GB</td>
+                    </tr>
+                    <tr>
+                        <td>CPU Speed</td>
+                        <td>1000MHz</td>
+                    </tr>
+                    <tr>
+                        <td>Storage</td>
+                        <td>128GB</td>
+                    </tr>
+                    <tr>
+                        <td>Screen Size</td>
+                        <td>6.7 Inches</td>
+                    </tr>
+                    <tr>
+                        <td>Resolution</td>
+                        <td>2340x1080, 120Hz Refresh Rate, 1,900 nits (peak)</td>
+                    </tr>
+                    <tr>
+                        <td>Model Name</td>
+                        <td>Galaxy S24 FE</td>
+                    </tr>
+                    <tr>
+                        <td>Wireless Carrier</td>
+                        <td>Unlocked for All Carriers</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </section>
+        
+        <section class="section" id="reviews">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">Jan Carlo</div>
+                        <div class="review-date">April 5, 2025</div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <div class="review-text">A great 4 month experience. The phone has exceeded my expectations in terms of performance and camera quality. The battery life is impressive and the AI features are actually useful in day-to-day use.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">E. Hart</div>
+                        <div class="review-date">April 19, 2025</div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <div class="review-text">Switched from iPhone to Samsung. This phone is amazing. The transition was smoother than I expected and the features on this phone blow my old iPhone out of the water. The screen is gorgeous and the camera takes incredible photos.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">Essie</div>
+                        <div class="review-date">March 8, 2025</div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <div class="review-text">Awesome phone at a great price. You get flagship features without paying flagship prices. The AI features are not just gimmicks but actually enhance the user experience significantly.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">Carolina</div>
+                        <div class="review-date">December 26, 2024</div>
+                    </div>
+                    <div class="review-rating">★★★★</div>
+                    <div class="review-text">Good phone overall. I've noticed it gets a bit warm during intensive tasks, and the build feels a bit fragile compared to previous Samsung models. However, the camera and display are exceptional for the price point.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">Jaden dunn</div>
+                        <div class="review-date">April 25, 2025</div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <div class="review-text">Nice and easy. Great battery life and sound quality. The phone lasts all day with heavy use and the speakers are surprisingly good for a phone in this price range.</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-name">Lyn</div>
+                        <div class="review-date">March 17, 2025</div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                    <div class="review-text">Functional and so much fun to explore all the features! There's so much this phone can do that I'm still discovering new features weeks after purchase. The AI translation has been particularly useful during my travels.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Samsung Galaxy S24 FE Showcase</p>
+            <div class="footer-links">
+                <a href="#overview">Overview</a>
+                <a href="#features">Features</a>
+                <a href="#specs">Specs</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+            <p>This is an unofficial fan page. All product information and images are property of SAMSUNG.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="back-to-top">↑</a>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+            });
+        });
+        
+        // Product Image Gallery
+        const mainImage = document.getElementById('main-image');
+        const thumbnails = document.querySelectorAll('.product-thumbnail');
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const src = thumbnail.getAttribute('data-src');
+                mainImage.src = src;
+                
+                // Remove active class from all thumbnails
+                thumbnails.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked thumbnail
+                thumbnail.classList.add('active');
+            });
+        });
+        
+        // Performance Chart
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        
+        // Create gradient for chart
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(26, 115, 232, 0.8)');
+        gradient.addColorStop(1, 'rgba(26, 115, 232, 0.1)');
+        
+        // Chart data and configuration
+        const labels = ['Battery', 'Camera', 'Display', 'Performance', 'Software', 'Design'];
+        const data = [90, 95, 92, 88, 94, 85];
+        
+        // Simple chart implementation
+        function drawChart() {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            
+            const chartHeight = ctx.canvas.height - 60;
+            const chartWidth = ctx.canvas.width - 60;
+            const barWidth = chartWidth / labels.length;
+            const maxValue = 100;
+            
+            // Draw title
+            ctx.fillStyle = '#3c4043';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Galaxy S24 FE Performance Scores', ctx.canvas.width / 2, 20);
+            
+            // Draw bars
+            for (let i = 0; i < labels.length; i++) {
+                const x = 40 + i * barWidth;
+                const barHeight = (data[i] / maxValue) * chartHeight;
+                const y = chartHeight - barHeight + 30;
+                
+                // Draw bar
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth - 10, barHeight);
+                
+                // Draw value
+                ctx.fillStyle = '#3c4043';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(data[i], x + (barWidth - 10) / 2, y - 5);
+                
+                // Draw label
+                ctx.fillStyle = '#3c4043';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i], x + (barWidth - 10) / 2, chartHeight + 50);
+            }
+        }
+        
+        // Responsive chart
+        function resizeChart() {
+            ctx.canvas.width = ctx.canvas.parentNode.offsetWidth;
+            drawChart();
+        }
+        
+        window.addEventListener('load', resizeChart);
+        window.addEventListener('resize', resizeChart);
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
